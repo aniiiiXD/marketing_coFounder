@@ -1,0 +1,26 @@
+{
+  "analytics_agent": {
+    "name": "Analytics Agent",
+    "description": "Analyzes marketing campaign performance and provides insights",
+    "capabilities": ["campaign_analysis", "performance_metrics", "trend_analysis"],
+    "model": "gemini-pro"
+  },
+  "content_planning_agent": {
+    "name": "Content Planning Agent", 
+    "description": "Creates content strategies and editorial calendars",
+    "capabilities": ["content_strategy", "editorial_calendar", "content_ideas"],
+    "model": "gemini-pro"
+  },
+  "newsletter_agent": {
+    "name": "Newsletter Agent",
+    "description": "Creates engaging newsletter content",
+    "capabilities": ["newsletter_creation", "email_marketing", "audience_engagement"],
+    "model": "gemini-pro"
+  },
+  "presentation_agent": {
+    "name": "Presentation Agent",
+    "description": "Creates marketing presentations and reports",
+    "capabilities": ["presentation_creation", "data_visualization", "executive_summaries"],
+    "model": "gemini-pro"
+  }
+}

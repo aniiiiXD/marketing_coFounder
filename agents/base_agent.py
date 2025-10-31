@@ -15,6 +15,7 @@ This module provides a base class for all AI agents with:
 - Response formatting and parsing
 """
 
+import json
 from typing import Dict, Any, Optional, Type, TypeVar, Generic
 from pydantic import BaseModel, ValidationError
 from google import genai
@@ -64,8 +65,15 @@ class BaseAgent(Generic[T]):
         self.system_instruction = self.get_system_instruction()
         self.response_model = self.get_response_model()
         
-        # Initialize the AI client
-        self.client = genai.Client()
+        # Get and validate API key
+        self.api_key = os.getenv('GOOGLE_API_KEY')
+        if not self.api_key:
+            raise ValueError("GOOGLE_API_KEY environment variable is not set. Please check your .env file.")
+            
+        print(f"Using API Key: {self.api_key[:10]}...{self.api_key[-4:]}")
+        
+        # Initialize the AI client with API key
+        self.client = genai.Client(api_key=self.api_key)
         
         logger.info(f"Initialized {self.__class__.__name__} with model {model_name}")
     
@@ -129,62 +137,50 @@ class BaseAgent(Generic[T]):
         **kwargs
     ) -> T:
         """
-        Generate a structured response from the AI model.
+        Generate a structured response using the AI model.
         
         Args:
-            prompt: The user's input prompt
-            response_format: Optional JSON schema for the response
-            **kwargs: Additional configuration overrides
+            prompt: The input prompt or message
+            response_format: Optional schema for the expected response format
+            **kwargs: Additional parameters for the generation
             
         Returns:
-            T: Validated response model instance
+            An instance of the response model with the generated content
             
         Raises:
             ValueError: If the response cannot be generated or validated
         """
-        # Prepare the full prompt with JSON formatting instructions
-        full_prompt = prompt
-        if response_format:
-            format_instruction = f"""
-            Respond with a JSON object that follows this exact structure:
-            {json.dumps(response_format, indent=2)}
-            
-            Ensure the response is valid JSON and includes all required fields.
-            """
-            full_prompt = f"{prompt}\n\n{format_instruction}"
-        else:
-            full_prompt = f"{prompt}\n\nRespond with a valid JSON object containing your response."
-        
         try:
-            # Configure the API request
-            config = {
-                "model": self.model_name,
-                "config": types.GenerateContentConfig(
-                    system_instruction=self.system_instruction,
-                    temperature=kwargs.get('temperature', self.temperature),
-                    max_output_tokens=kwargs.get('max_tokens', self.max_tokens),
+            # Generate the response using the specified template
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    thinking_config=types.ThinkingConfig(thinking_budget=0)  # Disables thinking
                 ),
-                "contents": [{"role": "user", "parts": [{"text": full_prompt}]}]
-            }
+                **kwargs
+            )
             
-            # Make the API call
-            logger.info(f"Sending request to {self.model_name}")
-            response = self.client.models.generate_content(**config)
+            # Parse and validate the response
+            response_json = response.json()
+            # Extract the text content from the Gemini response
+            if 'candidates' in response_json and len(response_json['candidates']) > 0:
+                candidate = response_json['candidates'][0]
+                if 'content' in candidate and 'parts' in candidate['content'] and len(candidate['content']['parts']) > 0:
+                    content = candidate['content']['parts'][0]['text']
+                    try:
+                        # Try to parse the content as JSON if it's a JSON string
+                        content_json = json.loads(content)
+                        return self._validate_response(content_json)
+                    except json.JSONDecodeError:
+                        # If it's not a JSON string, try to use it as is
+                        return self._validate_response({"response": content})
             
-            # Parse the response
-            response_text = response.text.strip()
-            try:
-                response_data = json.loads(response_text)
-            except json.JSONDecodeError as e:
-                logger.error(f"Failed to parse response as JSON: {e}")
-                logger.debug(f"Raw response: {response_text}")
-                raise ValueError("The response could not be parsed as valid JSON")
-            
-            # Validate against the response model
-            return self._validate_response(response_data)
+            # If we can't extract structured content, try to validate the full response
+            return self._validate_response(response_json)
             
         except Exception as e:
-            logger.error(f"Error generating response: {str(e)}")
+            logger.error(f"Error in generate: {str(e)}")
             raise
     
     def generate_response(self, *args, **kwargs) -> T:
@@ -201,3 +197,42 @@ class BaseAgent(Generic[T]):
             NotImplementedError: If not implemented by child class
         """
         raise NotImplementedError("Subclasses must implement generate_response")
+
+
+
+# Test the API connection when this module is run directly
+# if __name__ == "__main__":
+#     import asyncio
+    
+#     async def test_api_connection():
+#         print("\n=== Testing API Connection ===")
+        
+#         # Create a test agent
+#         test_agent = BaseAgent()
+        
+#         try:
+#             # Test the API with a simple prompt
+#             print("\nSending test request to Gemini API...")
+#             response = test_agent.client.models.generate_content(
+#                 model="gemini-2.5-flash",
+#                 contents="Hello, Gemini! This is a test. Please respond with a short greeting.",
+#                 config=types.GenerateContentConfig(
+#                     thinking_config=types.ThinkingConfig(thinking_budget=0)
+#                 )
+#             )
+            
+#             print("\n=== Test Successful! ===")
+#             print("API Response:")
+#             print(response.text)
+            
+#         except Exception as e:
+#             print("\n=== Test Failed! ===")
+#             print(f"Error: {str(e)}")
+#             if "API key" in str(e):
+#                 print("\nTroubleshooting:")
+#                 print("1. Make sure you have a .env file in your project root")
+#                 print("2. Verify it contains: GOOGLE_API_KEY=your_actual_api_key")
+#                 print("3. The .env file should be in the same directory as main.py")
+    
+#     # Run the test
+#     asyncio.run(test_api_connection())
