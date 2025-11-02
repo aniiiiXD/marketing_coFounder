@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 from rag.rag_system import MarketingRAGSystem
 
-class SimpleMarketingAssistant:
+class SimpleMarketingAssistant:            
     """Simple text-based marketing assistant"""
     
     def __init__(self):

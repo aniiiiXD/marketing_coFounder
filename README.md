@@ -2,13 +2,22 @@
 
 An AI-powered marketing automation system designed for marketing co-founders and teams. Get intelligent content creation, campaign analysis, and strategic insights using specialized AI agents that understand your business context.
 
+## ✨ Enhanced Features
+
+- **Smart Document Management**: Add, update, and remove documents dynamically
+- **Semantic Search**: Advanced search with relevance scoring and filtering
+- **Automatic Backups**: Built-in backup and export capabilities
+- **Duplicate Prevention**: Intelligent detection prevents re-adding same content
+- **Enhanced Chunking**: Semantic text splitting preserves context and meaning
+- **Metadata Filtering**: Search by content type, source, or custom attributes
+
 ## 🚀 Quick Start (5 minutes)
 
 ### 1. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-
+ 
 ### 2. Set Up Your Knowledge Base
 ```bash
 python data_onboarding.py
@@ -68,23 +77,47 @@ marketing-agent/
 └── main.py              # Run this to start
 ```
 
-## 🔧 Adding Your Marketing Data
+## 🔧 Managing Your Marketing Data
 
-### Method 1: Text Files
-1. Add `.txt` files to `knowledge_base/` directory
-2. Run `python data_onboarding.py` to index them
-3. Agents will automatically use this knowledge
-
-### Method 2: Structured Data
+### Adding Documents
 ```python
 from data_onboarding import DataOnboarder
 
 onboarder = DataOnboarder()
+
+# Method 1: Text files (automatic indexing)
+onboarder.onboard_text_files(["knowledge_base/strategy.txt", "knowledge_base/brand_guide.txt"])
+
+# Method 2: Structured data
 onboarder.onboard_marketing_data({
     "campaign_name": "Q4 Launch",
     "target_ctr": "2.5%",
     "budget": "$50000"
 }, "campaign_data")
+
+# Method 3: Company information
+onboarder.onboard_company_info({
+    "name": "Your Company",
+    "industry": "SaaS",
+    "target_audience": "Small businesses"
+})
+```
+
+### Document Management
+```python
+# Update existing document
+onboarder.update_document("knowledge_base/strategy.txt")
+
+# Remove document
+onboarder.remove_document("knowledge_base/old_strategy.txt")
+
+# Create backup
+backup_path = onboarder.create_backup()
+print(f"Backup saved to: {backup_path}")
+
+# Check status
+status = onboarder.get_status()
+print(f"Knowledge base: {status['document_count']} documents from {status['unique_sources']} sources")
 ```
 
 ## 🎛️ Configuration
@@ -100,31 +133,78 @@ Edit `config/agents_config.json` to modify agent behavior and capabilities.
 
 ## 💡 Example Usage
 
-### Generate a Content Campaign
+### Enhanced RAG System
 ```python
-from agents.orchestrator import Orchestrator
+from rag.rag_system import MarketingRAGSystem
 
-orchestrator = Orchestrator()
+rag = MarketingRAGSystem()
 
-result = await orchestrator.execute_workflow(
-    "content_campaign",
-    campaign_topic="Remote Work Productivity",
-    target_audience="Freelancers and digital nomads, 25-40",
-    timeframe="30 days"
+# Ask questions with filtering
+result = rag.ask_question(
+    "How should I price my SaaS product?",
+    filters={"type": "company_info", "source": "pricing_strategy.txt"}
+)
+print(f"Answer: {result['answer']}")
+print(f"Relevance: {result['avg_relevance']:.3f}")
+print(f"Sources: {result['sources']}")
+
+# Search documents with detailed results
+search_results = rag.search_documents(
+    "content marketing strategy",
+    filters={"type": "text_file"},
+    n_results=5
+)
+
+# Generate content with context
+content = rag.generate_marketing_content(
+    content_type="blog_post",
+    topic="Remote Work Productivity",
+    target_audience="Freelancers and digital nomads, 25-40"
 )
 ```
 
-### Analyze Campaign Performance
+### Document Management
 ```python
-analysis = await orchestrator.execute_workflow(
-    "analyze_campaign_performance",
-    campaign_data={
-        "impressions": 100000,
-        "clicks": 5000,
-        "conversions": 250,
-        "revenue": 50000
-    }
+# Add new document
+rag.add_company_document("Our new product strategy...", "product_strategy_2024.txt")
+
+# Update existing document
+rag.update_document("old_strategy.txt", "Updated strategy content...")
+
+# Remove document
+rag.remove_document("outdated_info.txt")
+
+# Create backup
+backup_result = rag.create_backup()
+print(f"Backup created: {backup_result['backup_path']}")
+
+# Get comprehensive status
+status = rag.get_system_status()
+print(f"System status: {status['status']}")
+print(f"Capabilities: {status['capabilities']}")
+```
+
+### Advanced Search Features
+```python
+from rag.vector_store import VectorStore
+
+vector_store = VectorStore()
+
+# Search with filters and relevance scoring
+results = vector_store.search(
+    "pricing strategy",
+    n_results=10,
+    filters={"type": ["company_info", "text_file"], "source": "strategy.txt"}
 )
+
+for result in results:
+    print(f"Relevance: {result['relevance_score']:.3f}")
+    print(f"Source: {result['metadata']['source']}")
+    print(f"Content: {result['document'][:100]}...")
+
+# Export data for backup
+export_result = vector_store.export_data("backup_2024.json")
+print(f"Exported {export_result['count']} documents")
 ```
 
 ## 🚀 Production Deployment
@@ -151,6 +231,20 @@ kubectl apply -f infra/k8s/
 - Run `python data_onboarding.py` to add your company data
 - Add `.txt` files to `knowledge_base/` directory
 
+**Duplicate documents**
+- The system automatically prevents duplicates based on document IDs
+- Use `update_document()` instead of re-adding existing files
+
+**Low relevance scores**
+- Check if your query matches the content in your knowledge base
+- Use filters to narrow search to specific content types
+- Add more relevant documents to improve context
+
+**Backup/restore issues**
+- Backups are stored in `./backups/` directory
+- Use `vector_store.export_data()` for manual exports
+- Import with `vector_store.import_data()` to restore
+
 ## 🤝 Support
 
 For marketing co-founders who need help:
@@ -158,14 +252,42 @@ For marketing co-founders who need help:
 2. Review the example usage patterns
 3. Start with the quick setup script: `python data_onboarding.py`
 
+## 📈 Advanced Features
+
+### Knowledge Base Management
+- **Smart Chunking**: Semantic text splitting preserves context across chunks
+- **Relevance Scoring**: Every search result includes confidence scores
+- **Metadata Filtering**: Search by content type, source, date, or custom attributes
+- **Duplicate Prevention**: Automatic detection prevents re-indexing same content
+- **Version Control**: Track document updates with timestamps
+
+### Search & Retrieval
+- **Hybrid Search**: Combines semantic similarity with metadata filtering  
+- **Context Preservation**: Overlapping chunks maintain meaning across boundaries
+- **Source Attribution**: Every answer includes source documents and relevance scores
+- **Query Expansion**: Enhanced search understanding for better results
+
+### Data Management
+- **CRUD Operations**: Add, update, delete documents without rebuilding
+- **Backup & Export**: Automatic backups with JSON export/import
+- **Status Monitoring**: Comprehensive system health and usage analytics
+- **Batch Processing**: Efficient handling of multiple document operations
+
+### Production Features
+- **Error Handling**: Graceful degradation with detailed error messages
+- **Logging**: Comprehensive logging for debugging and monitoring
+- **Performance**: Optimized chunking and search for large knowledge bases
+- **Scalability**: Designed for growing document collections
+
 ## 📈 Next Steps
 
-1. **Add More Data**: Drop marketing documents into `knowledge_base/`
-2. **Customize Agents**: Edit configurations in `config/`
-3. **Integrate APIs**: Connect your CRM, analytics tools, and social media
-4. **Scale Up**: Use the Kubernetes deployment for production
+1. **Enhance Knowledge Base**: Use the new document management features to keep content fresh
+2. **Leverage Filtering**: Use metadata filters for more precise search results
+3. **Monitor Performance**: Check relevance scores to optimize your content
+4. **Create Backups**: Set up regular backups using the built-in export functionality
+5. **Scale Intelligently**: Use the enhanced chunking for better context preservation
 
-Built for marketing teams who want AI that understands their business context and delivers actionable results.
+Built for marketing teams who want AI that understands their business context and delivers actionable results with enterprise-grade reliability.
 ## 🎯
  Simple Text-Only Usage
 

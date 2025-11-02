@@ -1,0 +1,146 @@
+Eterna Brand Voice and Messaging Guidelines
+
+BRAND PERSONALITY:
+Professional yet Accessible | Innovative | Trustworthy | Empowering | Technical Excellence
+
+CORE BRAND VOICE ATTRIBUTES:
+
+1. PROFESSIONAL YET ACCESSIBLE
+- Use clear, jargon-free language when possible
+- Explain complex concepts in understandable terms
+- Maintain professional credibility while being approachable
+- Balance technical accuracy with readability
+
+Example: "Our perpetual options engine processes thousands of trades per second" 
+NOT: "Our ultra-sophisticated algorithmic infrastructure leverages cutting-edge computational paradigms"
+
+2. INNOVATIVE
+- Emphasize cutting-edge technology and forward-thinking solutions
+- Highlight unique features and capabilities
+- Position as industry leader in unified trading platforms
+- Showcase startup agility and rapid development
+
+Example: "We're pioneering the future of unified trading platforms"
+NOT: "We offer traditional trading solutions"
+
+3. TRUSTWORTHY
+- Emphasize security, reliability, and regulatory compliance
+- Use concrete facts and metrics
+- Acknowledge challenges honestly
+- Build confidence through transparency
+
+Example: "99.99% uptime with enterprise-grade security"
+NOT: "Probably reliable most of the time"
+
+4. EMPOWERING
+- Focus on enabling user success and growth
+- Emphasize democratization of professional tools
+- Highlight educational and community aspects
+- Position users as capable and intelligent
+
+Example: "Unlock professional trading strategies with institutional-grade tools"
+NOT: "Let us handle your trading for you"
+
+5. TECHNICAL EXCELLENCE
+- Demonstrate deep technical knowledge
+- Use precise terminology when appropriate
+- Highlight performance metrics and capabilities
+- Show understanding of complex trading concepts
+
+Example: "Sub-millisecond execution with real-time Greeks calculation"
+NOT: "Really fast trading with good math"
+
+TONE VARIATIONS BY AUDIENCE:
+
+FOR RETAIL TRADERS:
+- Encouraging and educational
+- Focus on accessibility and empowerment
+- Use analogies and examples
+- Emphasize learning and growth opportunities
+
+FOR HFT FIRMS:
+- Technical and precise
+- Focus on performance and reliability
+- Use industry-specific terminology
+- Emphasize infrastructure capabilities
+
+FOR PROFESSIONAL TRADERS:
+- Balanced technical and accessible
+- Focus on advanced features and flexibility
+- Acknowledge expertise while offering value
+- Emphasize efficiency and competitive advantage
+
+MESSAGING FRAMEWORKS:
+
+PROBLEM-SOLUTION FRAMEWORK:
+"Traditional trading platforms force you to choose between retail accessibility and institutional performance. Eterna eliminates this compromise with our unified platform."
+
+FEATURE-BENEFIT FRAMEWORK:
+"Our perpetual options engine [FEATURE] enables sophisticated hedging strategies [BENEFIT] that were previously only available to institutional traders [VALUE]."
+
+BEFORE-AFTER FRAMEWORK:
+"Before: Managing multiple platforms for different trading needs. After: One unified terminal for all your trading requirements."
+
+KEY MESSAGING PILLARS:
+
+1. UNIFIED PLATFORM
+"One platform, every trading need"
+"Unified trading for retail and institutional markets"
+"Eliminate platform fragmentation"
+
+2. PERPETUAL OPTIONS SPECIALIZATION
+"Advanced perpetual options made accessible"
+"Professional options trading for everyone"
+"Perpetual options expertise you can trust"
+
+3. INSTITUTIONAL GRADE, RETAIL FRIENDLY
+"Professional tools, accessible pricing"
+"Institutional performance, retail simplicity"
+"Enterprise reliability, startup innovation"
+
+4. COMPREHENSIVE AUTOMATION
+"From manual trading to full automation"
+"Complete SDK ecosystem for developers"
+"Algorithmic trading made simple"
+
+WORDS TO USE:
+- Unified, integrated, comprehensive
+- Professional, institutional-grade, enterprise
+- Accessible, user-friendly, intuitive
+- Advanced, sophisticated, cutting-edge
+- Reliable, secure, compliant
+- Innovative, pioneering, revolutionary
+- Empowering, enabling, democratizing
+
+WORDS TO AVOID:
+- Complicated, complex (use "sophisticated" instead)
+- Cheap (use "cost-effective" or "competitive")
+- Basic, simple (use "streamlined" or "intuitive")
+- Revolutionary (overused, use "innovative")
+- Best, ultimate, perfect (use specific metrics)
+
+CONTENT STYLE GUIDELINES:
+
+HEADLINES:
+- Clear and benefit-focused
+- Include key differentiators
+- Use active voice
+- Keep under 60 characters for digital
+
+BODY COPY:
+- Lead with benefits, support with features
+- Use bullet points for complex information
+- Include specific metrics and examples
+- End with clear calls-to-action
+
+TECHNICAL CONTENT:
+- Define terms on first use
+- Use consistent terminology
+- Include practical examples
+- Balance detail with readability
+
+SOCIAL MEDIA:
+- Conversational but professional
+- Include relevant hashtags
+- Use visuals to explain concepts
+- Engage with community discussions

@@ -10,7 +10,7 @@ import os
 import asyncio
 from pathlib import Path
 from typing import List, Dict, Any
-import logging
+import logging 
 from datetime import datetime
 import json
 
@@ -105,31 +105,100 @@ class DataOnboarder:
         )
         logger.info("Company information onboarded successfully")
     
-    def _chunk_text(self, text: str, chunk_size: int = 1000) -> List[str]:
-        """Simple text chunking"""
-        words = text.split()
+    def _chunk_text(self, text: str, chunk_size: int = 1000, overlap: int = 100) -> List[str]:
+        """Enhanced semantic text chunking with overlap"""
+        # First try to split by paragraphs
+        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+        
+        if not paragraphs:
+            # Fallback to sentence splitting
+            import re
+            sentences = re.split(r'[.!?]+', text)
+            paragraphs = [s.strip() for s in sentences if s.strip()]
+        
         chunks = []
         current_chunk = []
         current_size = 0
         
-        for word in words:
-            current_chunk.append(word)
-            current_size += len(word) + 1
+        for para in paragraphs:
+            para_size = len(para)
             
-            if current_size >= chunk_size:
-                chunks.append(' '.join(current_chunk))
-                current_chunk = []
-                current_size = 0
+            # If single paragraph is too large, split it
+            if para_size > chunk_size:
+                if current_chunk:
+                    chunks.append(' '.join(current_chunk))
+                    current_chunk = []
+                    current_size = 0
+                
+                # Split large paragraph by sentences
+                sentences = [s.strip() + '.' for s in para.split('.') if s.strip()]
+                for sentence in sentences:
+                    if current_size + len(sentence) > chunk_size and current_chunk:
+                        chunks.append(' '.join(current_chunk))
+                        # Keep overlap
+                        if overlap > 0 and len(current_chunk) > 1:
+                            overlap_words = ' '.join(current_chunk).split()[-overlap:]
+                            current_chunk = overlap_words
+                            current_size = sum(len(w) for w in overlap_words)
+                        else:
+                            current_chunk = []
+                            current_size = 0
+                    
+                    current_chunk.append(sentence)
+                    current_size += len(sentence)
+            else:
+                # Check if adding this paragraph exceeds chunk size
+                if current_size + para_size > chunk_size and current_chunk:
+                    chunks.append(' '.join(current_chunk))
+                    # Keep overlap
+                    if overlap > 0 and len(current_chunk) > 1:
+                        overlap_words = ' '.join(current_chunk).split()[-overlap:]
+                        current_chunk = overlap_words
+                        current_size = sum(len(w) for w in overlap_words)
+                    else:
+                        current_chunk = []
+                        current_size = 0
+                
+                current_chunk.append(para)
+                current_size += para_size
         
+        # Add remaining chunk
         if current_chunk:
             chunks.append(' '.join(current_chunk))
         
-        return chunks
+        return chunks if chunks else [text]
+    
+    def update_document(self, file_path: str, force_update: bool = False):
+        """Update an existing document in the knowledge base"""
+        try:
+            # Delete existing chunks from this source
+            self.vector_store.delete_by_source(file_path)
+            
+            # Re-add the document
+            self.onboard_text_files([file_path])
+            logger.info(f"Updated document: {file_path}")
+            
+        except Exception as e:
+            logger.error(f"Error updating document {file_path}: {e}")
+            raise
+    
+    def remove_document(self, file_path: str):
+        """Remove a document from the knowledge base"""
+        try:
+            self.vector_store.delete_by_source(file_path)
+            logger.info(f"Removed document: {file_path}")
+        except Exception as e:
+            logger.error(f"Error removing document {file_path}: {e}")
+            raise
+    
+    def create_backup(self) -> str:
+        """Create a backup of the knowledge base"""
+        return self.vector_store.create_backup()
     
     def get_status(self):
-        """Get current knowledge base status"""
+        """Get comprehensive knowledge base status"""
         info = self.vector_store.get_collection_info()
-        logger.info(f"Knowledge base contains {info['document_count']} documents")
+        logger.info(f"Knowledge base contains {info['document_count']} documents from {info['unique_sources']} sources")
         return info
 
 # Quick setup function for marketing co-founders

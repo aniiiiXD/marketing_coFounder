@@ -1,0 +1,89 @@
+Eterna Target Audience Analysis
+
+PRIMARY TARGET SEGMENTS:
+
+1. RETAIL TRADERS
+Demographics:
+- Age: 25-45 years old
+- Income: $50K-$200K annually
+- Education: College-educated, often in finance, tech, or business
+- Experience: Intermediate to advanced traders
+- Location: Global, with focus on US, EU, and APAC markets
+
+Characteristics:
+- Seeking professional-grade trading tools
+- Interested in options and derivatives trading
+- Value advanced analytics and risk management
+- Want institutional-quality execution speeds
+- Desire educational resources and community features
+- Price-conscious but willing to pay for quality
+- Tech-savvy and comfortable with digital platforms
+
+Pain Points:
+- Limited access to advanced options trading tools
+- High fees on existing platforms
+- Poor execution speeds and slippage
+- Lack of sophisticated risk management tools
+- Limited educational resources for complex strategies
+- Fragmented trading experience across multiple platforms
+
+2. HIGH-FREQUENCY TRADING FIRMS
+Demographics:
+- Company size: 5-500 employees
+- Trading volume: $1M-$1B+ daily
+- Geographic focus: Global financial centers
+- Technology focus: Quantitative and algorithmic trading
+
+Characteristics:
+- Require ultra-low latency execution
+- Need comprehensive API and SDK access
+- Demand institutional-grade infrastructure
+- Value customizable trading solutions
+- Require robust risk management systems
+- Need reliable market data feeds
+- Seek cost-effective trading infrastructure
+
+Pain Points:
+- High infrastructure costs
+- Complex integration requirements
+- Limited perpetual options market access
+- Expensive market data and connectivity
+- Regulatory compliance complexity
+- Need for multiple vendor relationships
+
+SECONDARY TARGET SEGMENTS:
+
+3. PROFESSIONAL INDIVIDUAL TRADERS
+- Former institutional traders
+- High-net-worth individuals
+- Sophisticated retail traders transitioning to professional status
+- Seeking institutional tools with retail accessibility
+
+4. SMALL TO MEDIUM TRADING FIRMS
+- Proprietary trading firms
+- Hedge funds under $100M AUM
+- Family offices with active trading strategies
+- Regional trading companies
+
+5. FINTECH DEVELOPERS AND INTEGRATORS
+- Companies building trading applications
+- Financial advisors seeking trading infrastructure
+- Robo-advisors requiring options capabilities
+- Educational platforms teaching advanced trading
+
+MARKET SIZING:
+- Retail options traders: ~2M active globally
+- HFT firms: ~1,000 globally
+- Professional individual traders: ~50K globally
+- Small trading firms: ~5,000 globally
+
+GEOGRAPHIC PRIORITIES:
+Primary: United States, United Kingdom, Singapore
+Secondary: European Union, Canada, Australia
+Tertiary: Hong Kong, Japan, South Korea
+
+MESSAGING PRIORITIES BY SEGMENT:
+Retail: "Professional trading tools made accessible"
+HFT: "Enterprise infrastructure with startup innovation"
+Professional: "Bridge the gap between retail and institutional"
+SME Firms: "Scale your trading operations efficiently"

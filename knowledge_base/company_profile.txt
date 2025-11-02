@@ -1,0 +1,31 @@
+Eterna - Company Profile
+
+Company Name: Eterna
+Industry: Financial Technology (FinTech) - Trading Infrastructure
+Stage: Series A Startup
+Team Size: 15 employees
+Funding Status: Series A completed
+
+Mission Statement:
+Democratizing advanced trading capabilities by providing a unified trading terminal that serves both retail traders and institutional high-frequency trading firms.
+
+Vision:
+To become the leading platform that bridges the gap between retail and institutional trading, making sophisticated trading tools accessible to everyone while providing enterprise-grade infrastructure for professional traders.
+
+Core Values:
+- Accessibility: Making advanced trading tools available to retail users
+- Performance: Delivering institutional-grade speed and reliability
+- Innovation: Continuously pushing the boundaries of trading technology
+- Transparency: Providing clear, honest trading experiences
+- Inclusivity: Serving traders of all experience levels and scales
+
+Company Overview:
+Eterna is a fast-growing fintech startup that has successfully completed Series A funding. With a lean but highly skilled team of 15 employees, we're building the next generation of trading infrastructure. Our unified platform serves two distinct but complementary markets: retail traders seeking professional-grade tools and high-frequency trading firms requiring robust, automated trading solutions.
+
+Key Differentiators:
+- Unified platform serving both retail and institutional markets
+- Advanced perpetual options trading capabilities
+- Comprehensive SDK suite for algorithmic trading
+- Institutional-grade infrastructure with retail-friendly interface
+- Series A backing providing stability and growth capital
+- Agile startup culture enabling rapid innovation and deployment
