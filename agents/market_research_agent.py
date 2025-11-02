@@ -1,5 +1,5 @@
 
-from base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class MarketResearchAgent:
     def __init__(self, use_rag=True):

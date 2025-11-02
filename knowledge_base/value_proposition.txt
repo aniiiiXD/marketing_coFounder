@@ -20,7 +20,7 @@ KEY VALUE PILLARS:
 - Educational resources for options trading mastery
 
 3. INSTITUTIONAL INFRASTRUCTURE, RETAIL ACCESSIBILITY
-- Enterprise-grade speed and reliability
+- Enterprise-grade speed and reliability     
 - User-friendly interfaces for complex strategies
 - Professional risk management tools
 - Institutional-quality market data

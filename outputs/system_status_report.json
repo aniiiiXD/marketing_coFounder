@@ -1,0 +1,24 @@
+{
+  "knowledge_base": {
+    "source_documents": 8,
+    "indexed_chunks": 8,
+    "unique_sources": 1,
+    "content_types": [
+      "text_file"
+    ],
+    "backup_count": 0
+  },
+  "outputs": {
+    "count": 0,
+    "recent": []
+  },
+  "capabilities": {
+    "document_management": true,
+    "semantic_search": true,
+    "backup_restore": true,
+    "content_filtering": true,
+    "relevance_scoring": true
+  },
+  "status": "operational",
+  "timestamp": "2025-11-03T02:19:03.442687"
+}

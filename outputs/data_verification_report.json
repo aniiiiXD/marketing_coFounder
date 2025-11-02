@@ -1,0 +1,17 @@
+{
+  "collection_info": {
+    "document_count": 8,
+    "collection_name": "marketing_knowledge",
+    "unique_sources": 1,
+    "content_types": [
+      "text_file"
+    ],
+    "backup_count": 0
+  },
+  "test_search_results": 3,
+  "sample_documents": [
+    "Eterna Brand Voice and Messaging Guidelines BRAND PERSONALITY: Professional yet Accessible | Innovat...",
+    "Eterna - Company Profile Company Name: Eterna Industry: Financial Technology (FinTech) - Trading Inf..."
+  ],
+  "verification_status": "success"
+}

@@ -19,7 +19,7 @@ Core Values:
 - Transparency: Providing clear, honest trading experiences
 - Inclusivity: Serving traders of all experience levels and scales
 
-Company Overview:
+Company Overview:      
 Eterna is a fast-growing fintech startup that has successfully completed Series A funding. With a lean but highly skilled team of 15 employees, we're building the next generation of trading infrastructure. Our unified platform serves two distinct but complementary markets: retail traders seeking professional-grade tools and high-frequency trading firms requiring robust, automated trading solutions.
 
 Key Differentiators:

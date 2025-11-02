@@ -1,4 +1,4 @@
-from base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class NewsletterAgent:
     def __init__(self, use_rag=True):
@@ -19,100 +19,104 @@ class NewsletterAgent:
 
 Generate complete newsletter content including subject lines, main body sections, key highlights, and calls-to-action. Focus on creating newsletters that inform, engage, and drive reader action."""
 
-    def create_newsletter_strategy(self, brand_info, subscriber_profile, newsletter_goals):
-        """Develop comprehensive newsletter strategy"""
+    def generate_newsletter(self, context_info, news_sources, brand_info=None, target_audience=None):
+        """Generate complete newsletter based on context and news"""
         
         # Get relevant context if RAG is enabled
-        context = ""
+        rag_context = ""
         if self.agent.use_rag:
-            search_query = f"newsletter strategy email marketing {brand_info}"
+            search_query = f"newsletter content {context_info} news"
             relevant_docs = self.agent.get_relevant_context(search_query, n_results=5)
             if relevant_docs:
-                context = f"\n\nRelevant Context:\n{chr(10).join(relevant_docs)}"
+                rag_context = f"\n\nRelevant Context from Knowledge Base:\n{chr(10).join(relevant_docs)}"
 
-        user_prompt = f"""Brand Information: {brand_info}
+        user_prompt = f"""Context Information: {context_info}
 
-Subscriber Profile: {subscriber_profile}
+News Sources and Updates: {news_sources}
 
-Newsletter Goals: {newsletter_goals}
+{f"Brand Information: {brand_info}" if brand_info else ""}
 
-Please develop a comprehensive newsletter strategy including:
-1. Newsletter positioning and unique value proposition
-2. Content pillars and recurring newsletter sections
-3. Publishing frequency and optimal send times
-4. Subscriber segmentation and personalization strategy
-5. Welcome sequence and onboarding flow
-6. Engagement tactics and interactive elements
-7. Monetization opportunities and conversion strategies
-8. Growth tactics for subscriber acquisition
-9. Performance metrics and success indicators
+{f"Target Audience: {target_audience}" if target_audience else ""}
 
-{context}"""
+Generate a complete newsletter including:
 
-        return self.agent.generate_response(
-            prompt=user_prompt,
-            system_instruction=self.system_prompt
-        )
+1. SUBJECT LINE OPTIONS (3-5 compelling variations)
+2. NEWSLETTER HEADER with engaging opening
+3. TOP NEWS HIGHLIGHTS (3-4 key stories with brief summaries)
+4. MAIN FEATURE STORY (detailed analysis of the most important news)
+5. INDUSTRY INSIGHTS section (trends and implications)
+6. QUICK BITES (5-7 shorter news items with one-line summaries)
+7. WHAT TO WATCH (upcoming events, dates, or developments)
+8. CLOSING THOUGHTS with call-to-action
 
-    def generate_newsletter_content(self, newsletter_theme, target_segment, key_updates):
-        """Generate specific newsletter content"""
-        
-        context = ""
-        if self.agent.use_rag:
-            search_query = f"newsletter content {newsletter_theme} {target_segment}"
-            relevant_docs = self.agent.get_relevant_context(search_query, n_results=3)
-            if relevant_docs:
-                context = f"\n\nRelevant Context:\n{chr(10).join(relevant_docs)}"
+Format the newsletter with clear sections, engaging headlines, and smooth transitions. Make it informative yet easy to scan and read.
 
-        user_prompt = f"""Newsletter Theme: {newsletter_theme}
-
-Target Segment: {target_segment}
-
-Key Updates/News: {key_updates}
-
-Create engaging newsletter content including:
-1. Compelling subject line options (3-5 variations)
-2. Engaging opening hook and preview text
-3. Main content sections with clear value propositions
-4. Industry insights and trending topics
-5. Company updates and product highlights
-6. Educational content and actionable tips
-7. Strong call-to-action and next steps
-8. Social proof and community highlights
-9. Closing with personality and brand voice
-
-{context}"""
+{rag_context}"""
 
         return self.agent.generate_response(
             prompt=user_prompt,
             system_instruction=self.system_prompt
         )
 
-    def optimize_newsletter_performance(self, current_metrics, improvement_goals):
-        """Provide newsletter optimization recommendations"""
+    def create_news_summary(self, news_articles, focus_area=None):
+        """Create a focused news summary from multiple articles"""
         
-        context = ""
+        rag_context = ""
         if self.agent.use_rag:
-            search_query = f"newsletter optimization email marketing metrics"
+            search_query = f"news summary {focus_area if focus_area else 'general'}"
             relevant_docs = self.agent.get_relevant_context(search_query, n_results=3)
             if relevant_docs:
-                context = f"\n\nRelevant Context:\n{chr(10).join(relevant_docs)}"
+                rag_context = f"\n\nRelevant Context:\n{chr(10).join(relevant_docs)}"
 
-        user_prompt = f"""Current Newsletter Metrics: {current_metrics}
+        user_prompt = f"""News Articles: {news_articles}
 
-Improvement Goals: {improvement_goals}
+{f"Focus Area: {focus_area}" if focus_area else ""}
 
-Provide optimization recommendations including:
-1. Subject line and preview text improvements
-2. Content structure and formatting enhancements
-3. Call-to-action optimization strategies
-4. Segmentation and personalization opportunities
-5. Send time and frequency optimization
-6. A/B testing recommendations
-7. Re-engagement campaign strategies
-8. List hygiene and deliverability improvements
+Create a comprehensive news summary including:
+1. EXECUTIVE SUMMARY (2-3 sentences capturing the main themes)
+2. KEY DEVELOPMENTS (5-7 most important news items with brief explanations)
+3. TREND ANALYSIS (what patterns or trends emerge from these stories)
+4. IMPACT ASSESSMENT (how these developments might affect readers)
+5. LOOKING AHEAD (what to watch for next)
 
-{context}"""
+Keep the summary engaging, informative, and actionable for newsletter readers.
+
+{rag_context}"""
+
+        return self.agent.generate_response(
+            prompt=user_prompt,
+            system_instruction=self.system_prompt
+        )
+
+    def generate_themed_newsletter(self, theme, context_data, news_data):
+        """Generate a newsletter focused on a specific theme"""
+        
+        rag_context = ""
+        if self.agent.use_rag:
+            search_query = f"themed newsletter {theme} content"
+            relevant_docs = self.agent.get_relevant_context(search_query, n_results=3)
+            if relevant_docs:
+                rag_context = f"\n\nRelevant Context:\n{chr(10).join(relevant_docs)}"
+
+        user_prompt = f"""Newsletter Theme: {theme}
+
+Context Data: {context_data}
+
+News Data: {news_data}
+
+Generate a themed newsletter including:
+1. THEME-FOCUSED SUBJECT LINES (3 options)
+2. THEMATIC INTRODUCTION explaining the focus
+3. CURATED NEWS SELECTION (stories that fit the theme)
+4. DEEP DIVE ANALYSIS on the theme's implications
+5. EXPERT PERSPECTIVES or quotes related to the theme
+6. ACTIONABLE TAKEAWAYS for readers
+7. RELATED RESOURCES or further reading
+8. THEME-APPROPRIATE CALL-TO-ACTION
+
+Ensure all content ties back to the central theme while remaining informative and engaging.
+
+{rag_context}"""
 
         return self.agent.generate_response(
             prompt=user_prompt,

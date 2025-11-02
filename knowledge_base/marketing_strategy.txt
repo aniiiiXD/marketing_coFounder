@@ -16,7 +16,7 @@ TARGET METRICS:
 
 MARKETING STRATEGY PILLARS:
 
-1. CONTENT-DRIVEN THOUGHT LEADERSHIP
+1. CONTENT-DRIVEN THOUGHT LEADERSHIP  
 Approach:
 - Educational content about perpetual options trading
 - Technical deep-dives for HFT audience

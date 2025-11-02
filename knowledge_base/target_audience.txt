@@ -22,7 +22,7 @@ Characteristics:
 Pain Points:
 - Limited access to advanced options trading tools
 - High fees on existing platforms
-- Poor execution speeds and slippage
+- Poor execution speeds and slippage   
 - Lack of sophisticated risk management tools
 - Limited educational resources for complex strategies
 - Fragmented trading experience across multiple platforms
